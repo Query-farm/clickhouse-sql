@@ -1,2 +1,0 @@
-/usr/bin/ar qc libduckdb_skiplistlib.a CMakeFiles/duckdb_skiplistlib.dir/SkipList.cpp.o
-/usr/bin/ranlib libduckdb_skiplistlib.a

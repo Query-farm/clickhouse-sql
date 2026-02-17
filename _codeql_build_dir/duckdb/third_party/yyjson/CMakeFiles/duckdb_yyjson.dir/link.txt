@@ -1,2 +1,0 @@
-/usr/bin/ar qc libduckdb_yyjson.a CMakeFiles/duckdb_yyjson.dir/yyjson.cpp.o
-/usr/bin/ranlib libduckdb_yyjson.a

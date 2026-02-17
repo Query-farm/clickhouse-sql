@@ -1,2 +1,0 @@
-/usr/bin/ar qc libtest_helpers.a CMakeFiles/test_helpers.dir/test_helpers.cpp.o CMakeFiles/test_helpers.dir/capi_tester.cpp.o CMakeFiles/test_helpers.dir/pid.cpp.o
-/usr/bin/ranlib libtest_helpers.a
