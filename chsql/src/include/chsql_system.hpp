@@ -4,7 +4,7 @@
 
 namespace duckdb {
 
-void RegisterSystemFunctions(DatabaseInstance &instance);
+void RegisterSystemFunctions(ExtensionLoader &loader);
 void CreateSystemViews(Connection &con);
 
 } // namespace duckdb

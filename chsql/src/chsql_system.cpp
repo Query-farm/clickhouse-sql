@@ -559,30 +559,30 @@ static unique_ptr<FunctionData> SystemDisksBind(ClientContext &context, TableFun
 }
 
 // -- Registration function
-void RegisterSystemFunctions(DatabaseInstance &instance) {
+void RegisterSystemFunctions(ExtensionLoader &loader) {
     // Register system.databases table function
     auto databases_func = TableFunction("system_databases", {}, SystemDatabasesFunction, SystemDatabasesBind);
-    ExtensionUtil::RegisterFunction(instance, databases_func);
+    loader.RegisterFunction(databases_func);
 
     // Register system.tables table function
     auto tables_func = TableFunction("system_tables", {}, SystemTablesFunction, SystemTablesBind);
-    ExtensionUtil::RegisterFunction(instance, tables_func);
+    loader.RegisterFunction(tables_func);
 
     // Register system.columns table function
     auto columns_func = TableFunction("system_columns", {}, SystemColumnsFunction, SystemColumnsBind);
-    ExtensionUtil::RegisterFunction(instance, columns_func);
+    loader.RegisterFunction(columns_func);
 
     // Register system.functions table function
     auto functions_func = TableFunction("system_functions", {}, SystemFunctionsFunction, SystemFunctionsBind);
-    ExtensionUtil::RegisterFunction(instance, functions_func);
+    loader.RegisterFunction(functions_func);
 
     // Register system.uptime scalar function
     auto uptime_func = ScalarFunction("uptime", {}, LogicalType::BIGINT, SystemUptimeFunction);
-    ExtensionUtil::RegisterFunction(instance, uptime_func);
+    loader.RegisterFunction(uptime_func);
 
     // Register system.disks table function
     auto disks_func = TableFunction("system_disks", {}, SystemDisksFunction, SystemDisksBind);
-    ExtensionUtil::RegisterFunction(instance, disks_func);
+    loader.RegisterFunction(disks_func);
 }
 
 void CreateSystemViews(Connection &con) {
