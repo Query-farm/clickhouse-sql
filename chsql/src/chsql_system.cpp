@@ -1,7 +1,6 @@
 #include "chsql_system.hpp"
 #include "duckdb/function/table_function.hpp"
 #include "duckdb/function/scalar_function.hpp"
-#include "duckdb/main/extension_util.hpp"
 #include "duckdb/main/client_context.hpp"
 #include "duckdb/catalog/catalog.hpp"
 #include "duckdb/main/connection.hpp"

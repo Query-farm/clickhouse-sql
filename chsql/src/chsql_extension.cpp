@@ -5,7 +5,6 @@
 #include "duckdb/common/exception.hpp"
 #include "duckdb/common/string_util.hpp"
 #include "duckdb/function/scalar_function.hpp"
-#include "duckdb/main/extension_util.hpp"
 #include "duckdb/parser/parsed_data/create_scalar_function_info.hpp"
 #include "duckdb/catalog/default/default_functions.hpp"
 #include "duckdb/catalog/default/default_table_functions.hpp"
@@ -206,7 +205,7 @@ static const DefaultTableMacro chsql_table_macros[] = {
     // System Table
     RegisterSystemFunctions(loader);
     // Register Views
-    Connection con(Catalog::GetSystemCatalog(loader.GetDatabase()).GetDatabase());
+    Connection con(Catalog::GetSystemCatalog(loader.GetDatabaseInstance()).GetDatabase());
     con.BeginTransaction();
     CreateSystemViews(con);
     con.Commit();
