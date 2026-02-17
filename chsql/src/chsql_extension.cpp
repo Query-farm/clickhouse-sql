@@ -5,7 +5,6 @@
 #include "duckdb/common/exception.hpp"
 #include "duckdb/common/string_util.hpp"
 #include "duckdb/function/scalar_function.hpp"
-#include "duckdb/main/extension_util.hpp"
 #include "duckdb/parser/parsed_data/create_scalar_function_info.hpp"
 #include "duckdb/catalog/default/default_functions.hpp"
 #include "duckdb/catalog/default/default_table_functions.hpp"
@@ -186,35 +185,35 @@ static const DefaultTableMacro chsql_table_macros[] = {
 	};
   // clang-format on
 
-  static void LoadInternal(DatabaseInstance &instance)
+  static void LoadInternal(ExtensionLoader &loader)
   {
     // Macros
     for (idx_t index = 0; chsql_macros[index].name != nullptr; index++)
     {
       auto info = DefaultFunctionGenerator::CreateInternalMacroInfo(chsql_macros[index]);
-      ExtensionUtil::RegisterFunction(instance, *info);
+      loader.RegisterFunction(*info);
     }
     // Table Macros
     for (idx_t index = 0; chsql_table_macros[index].name != nullptr; index++)
     {
       auto table_info = DefaultTableFunctionGenerator::CreateTableMacroInfo(chsql_table_macros[index]);
-      ExtensionUtil::RegisterFunction(instance, *table_info);
+      loader.RegisterFunction(*table_info);
     }
-    ExtensionUtil::RegisterFunction(instance, ReadParquetOrderedFunction());
+    loader.RegisterFunction(ReadParquetOrderedFunction());
     // Flock
-    ExtensionUtil::RegisterFunction(instance, DuckFlockTableFunction());
+    loader.RegisterFunction(DuckFlockTableFunction());
     // System Table
-    RegisterSystemFunctions(instance);
+    RegisterSystemFunctions(loader);
     // Register Views
-    Connection con(Catalog::GetSystemCatalog(instance).GetDatabase());
+    Connection con(Catalog::GetSystemCatalog(loader.GetDatabaseInstance()).GetDatabase());
     con.BeginTransaction();
     CreateSystemViews(con);
     con.Commit();
   }
 
-  void ChsqlExtension::Load(DuckDB &db)
+  void ChsqlExtension::Load(ExtensionLoader &loader)
   {
-    LoadInternal(*db.instance);
+    LoadInternal(loader);
   }
   std::string ChsqlExtension::Name()
   {
@@ -235,15 +234,9 @@ static const DefaultTableMacro chsql_table_macros[] = {
 extern "C"
 {
 
-  DUCKDB_EXTENSION_API void chsql_init(duckdb::DatabaseInstance &db)
+  DUCKDB_CPP_EXTENSION_ENTRY(chsql, loader)
   {
-    duckdb::DuckDB db_wrapper(db);
-    db_wrapper.LoadExtension<duckdb::ChsqlExtension>();
-  }
-
-  DUCKDB_EXTENSION_API const char *chsql_version()
-  {
-    return duckdb::DuckDB::LibraryVersion();
+    duckdb::LoadInternal(loader);
   }
 }
 
