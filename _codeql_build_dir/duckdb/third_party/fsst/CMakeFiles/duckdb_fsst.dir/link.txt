@@ -1,0 +1,2 @@
+/usr/bin/ar qc libduckdb_fsst.a CMakeFiles/duckdb_fsst.dir/libfsst.cpp.o
+/usr/bin/ranlib libduckdb_fsst.a

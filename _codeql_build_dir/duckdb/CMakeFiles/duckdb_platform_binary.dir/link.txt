@@ -1,0 +1,1 @@
+/home/runner/work/clickhouse-sql/.codeql-scratch/dbs/cpp/working/autobuild/bin/c++ -O3 -DNDEBUG -O3 -DNDEBUG   -Wl,--dependency-file=CMakeFiles/duckdb_platform_binary.dir/link.d CMakeFiles/duckdb_platform_binary.dir/tools/utils/test_platform.cpp.o -o duckdb_platform_binary

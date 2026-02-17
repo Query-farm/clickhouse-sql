@@ -1,0 +1,2 @@
+/usr/bin/ar qc libchsql_extension.a CMakeFiles/chsql_extension.dir/src/chsql_extension.cpp.o CMakeFiles/chsql_extension.dir/src/duck_flock.cpp.o CMakeFiles/chsql_extension.dir/src/chsql_system.cpp.o CMakeFiles/chsql_extension.dir/src/parquet_types.cpp.o
+/usr/bin/ranlib libchsql_extension.a

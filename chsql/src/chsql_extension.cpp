@@ -101,6 +101,8 @@ namespace duckdb
       {DEFAULT_SCHEMA, "toYYYYMMDD", {"date_expression", nullptr}, {{nullptr, nullptr}}, R"(DATE_FORMAT(date_expression, '%Y%m%d'))"},
       {DEFAULT_SCHEMA, "toYYYYMMDDhhmmss", {"date_expression", nullptr}, {{nullptr, nullptr}}, R"(DATE_FORMAT(date_expression, '%Y%m%d%H%M%S'))"},
       {DEFAULT_SCHEMA, "formatDateTime", {"time", "format", "timezone", nullptr}, {{nullptr, nullptr}}, R"(CASE  WHEN timezone IS NULL THEN strftime(time, format) ELSE strftime(time AT TIME ZONE timezone, format) END)"},
+      {DEFAULT_SCHEMA, "toUnixTimestamp", {"date_expression", nullptr}, {{nullptr, nullptr}}, R"(CAST(EXTRACT(EPOCH FROM date_expression) AS BIGINT))"},
+      {DEFAULT_SCHEMA, "fromUnixTimestamp", {"unix_timestamp", nullptr}, {{nullptr, nullptr}}, R"(CAST(to_timestamp(unix_timestamp) AS TIMESTAMP))"},
       // String Functions
       {DEFAULT_SCHEMA, "empty", {"str", nullptr}, {{nullptr, nullptr}}, R"(LENGTH(str) = 0)"},
       {DEFAULT_SCHEMA, "notEmpty", {"str", nullptr}, {{nullptr, nullptr}}, R"(LENGTH(str) > 0)"},
