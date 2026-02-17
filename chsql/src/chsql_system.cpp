@@ -503,9 +503,7 @@ static unique_ptr<FunctionData> SystemDisksBind(ClientContext &context, TableFun
     auto result = make_uniq<SystemDisksData>();
     
     // Assuming we are using the DuckDB database path
-    auto &db_instance = DatabaseInstance::GetDatabase(context);
-    DuckDB db(db_instance);
-    Connection con(db);
+    Connection con(Catalog::GetSystemCatalog(context).GetDatabase());
     
     // Query the duckdb_databases to get the database paths
     auto db_paths_query = con.Query("SELECT * FROM duckdb_databases();");
