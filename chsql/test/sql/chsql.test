@@ -324,6 +324,16 @@ SELECT toDayOfMonth('2023-05-15'::DATE)
 ----
 15
 
+query I
+SELECT toUnixTimestamp('2023-05-15 10:30:45'::TIMESTAMP)
+----
+1684146645
+
+query I
+SELECT fromUnixTimestamp(1684146645)
+----
+2023-05-15 10:30:45
+
 # String Functions
 query I
 SELECT empty('')

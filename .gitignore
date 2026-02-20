@@ -6,3 +6,5 @@ duckdb_unittest_tempdir/
 testext
 test/python/__pycache__/
 .Rhistory
+_codeql_build_dir/
+_codeql_detected_source_root
